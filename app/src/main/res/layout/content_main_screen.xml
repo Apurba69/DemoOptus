@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.Wipro.OptusDemo.UIScreen.MainScreenActivity"
+    tools:showIn="@layout/main_screen">
+
+    <LinearLayout
+        android:id="@+id/linearBg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+
+        <Button
+            android:id="@+id/scenarioOneBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SCENARIO 1"
+            />
+        <Button
+            android:id="@+id/scenarioTwoBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SCENARIO 2"
+            android:layout_marginTop="30dip"
+            />
+        </LinearLayout>
+</RelativeLayout>
