@@ -22,7 +22,7 @@
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="@string/old_kay"/>
         <activity
-            android:name=".MainScreenActivity"
+            android:name=".OptusLaunchActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

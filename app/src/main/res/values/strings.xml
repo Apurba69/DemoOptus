@@ -2,4 +2,6 @@
     <string name="app_name">Optus</string>
     <string name="action_settings">Settings</string>
     <string name="old_kay">AIzaSyD02JrXqIHtVFiaQ4vBQgrnFQ353qxV8uQ</string>
+    <string name="scenario_one">SCENARIO 1</string>
+    <string name="scenario_two">SCENARIO 2</string>
 </resources>

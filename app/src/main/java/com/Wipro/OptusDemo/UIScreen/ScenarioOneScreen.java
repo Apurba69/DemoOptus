@@ -1,72 +1,49 @@
 package com.Wipro.OptusDemo.UIScreen;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.Wipro.OptusDemo.Adapter.Data;
-
+import com.Wipro.OptusDemo.Constant.ConstantElement;
+import com.Wipro.OptusDemo.UIScreen.databinding.ScenarioOneScreenBinding;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by AP359544 on 12/8/2016.
+ * Created by AP359544 on 1/23/2017.
  */
 public class ScenarioOneScreen extends AppCompatActivity implements View.OnClickListener{
-    Button mBlueBtn;
-    Button mRedBtn;
-    Button mGreenBtn;
-    TextView mSetectItem;
-    LinearLayout mBottomLinear;
-    RecyclerView horizontal_recycler_view;
-    HorizontalAdapter horizontalAdapter;
+    private ScenarioOneScreenBinding mScenarioOneScreenBinding;
+    private HorizontalAdapter horizontalAdapter;
     private List<Data> data;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.scenario_one_screen);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        mSetectItem=(TextView)findViewById(R.id.selectedText);
-        mBlueBtn=(Button)findViewById(R.id.blueBtn);
-        mRedBtn=(Button)findViewById(R.id.redBtn);
-        mGreenBtn=(Button)findViewById(R.id.greenBtn);
-        mBottomLinear=(LinearLayout)findViewById(R.id.bottomLinear);
-        mBlueBtn.setOnClickListener(this);
-        mRedBtn.setOnClickListener(this);
-        mGreenBtn.setOnClickListener(this);
-
-        horizontal_recycler_view= (RecyclerView) findViewById(R.id.horizontal_recycler_view);
+        mScenarioOneScreenBinding = DataBindingUtil.setContentView(this, R.layout.scenario_one_screen);
+        setSupportActionBar(mScenarioOneScreenBinding.toolbar);
+        mScenarioOneScreenBinding.contentScenarioOne.blueBtn.setOnClickListener(this);
+        mScenarioOneScreenBinding.contentScenarioOne.greenBtn.setOnClickListener(this);
+        mScenarioOneScreenBinding.contentScenarioOne.redBtn.setOnClickListener(this);
         data = fill_with_data();
-        horizontalAdapter=new HorizontalAdapter(data, getApplication());
+        horizontalAdapter = new HorizontalAdapter(data, getApplication());
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(ScenarioOneScreen.this, LinearLayoutManager.HORIZONTAL, false);
-        horizontal_recycler_view.setLayoutManager(horizontalLayoutManager);
-        horizontal_recycler_view.setAdapter(horizontalAdapter);
-
-
+        mScenarioOneScreenBinding.contentScenarioOne.horizontalRecyclerView.setLayoutManager(horizontalLayoutManager);
+        mScenarioOneScreenBinding.contentScenarioOne.horizontalRecyclerView.setAdapter(horizontalAdapter);
         setFragment(new FragmentOne());
-
-
     }
 
     protected void setFragment(Fragment fragment) {
@@ -81,34 +58,31 @@ public class ScenarioOneScreen extends AppCompatActivity implements View.OnClick
     public void onClick(View view) {
         int Id = view.getId();
         switch (Id){
-
             case R.id.blueBtn:
-                mBottomLinear.setBackgroundColor(Color.BLUE);
+                mScenarioOneScreenBinding.contentScenarioOne.bottomLinear.setBackgroundColor(Color.BLUE);
                 break;
             case R.id.redBtn:
-                mBottomLinear.setBackgroundColor(Color.RED);
+                mScenarioOneScreenBinding.contentScenarioOne.bottomLinear.setBackgroundColor(Color.RED);
                 break;
             case R.id.greenBtn:
-                mBottomLinear.setBackgroundColor(Color.GREEN);
+                mScenarioOneScreenBinding.contentScenarioOne.bottomLinear.setBackgroundColor(Color.GREEN);
                 break;
-
+            default:
+                break;
         }
     }
 
-    public List<Data> fill_with_data() {
+    private List<Data> fill_with_data() {
 
         List<Data> data = new ArrayList<>();
-
-        data.add(new Data("Item 1"));
-        data.add(new Data("Item 2"));
-        data.add(new Data("Item 3"));
-        data.add(new Data("Item 4"));
-        data.add(new Data("Item 5"));
+        for(int i = 0;i< ConstantElement.ITEM.length;i++){
+            data.add(new Data(ConstantElement.ITEM[i]));
+        }
 
         return data;
     }
 
-    public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.MyViewHolder> {
+    public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.HorizontalItemViewHolder> {
 
 
         List<Data> horizontalList = Collections.emptyList();
@@ -121,10 +95,10 @@ public class ScenarioOneScreen extends AppCompatActivity implements View.OnClick
         }
 
 
-        public class MyViewHolder extends RecyclerView.ViewHolder {
+        public class HorizontalItemViewHolder extends RecyclerView.ViewHolder {
 
             TextView txtview;
-            public MyViewHolder(View view) {
+            public HorizontalItemViewHolder(View view) {
                 super(view);
                 txtview=(TextView) view.findViewById(R.id.txtNewsSource);
             }
@@ -133,15 +107,14 @@ public class ScenarioOneScreen extends AppCompatActivity implements View.OnClick
 
 
         @Override
-        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public HorizontalItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_items, parent, false);
 
-            return new MyViewHolder(itemView);
+            return new HorizontalItemViewHolder(itemView);
         }
 
-
         @Override
-        public void onBindViewHolder(final MyViewHolder holder, final int position) {
+        public void onBindViewHolder(final HorizontalItemViewHolder holder, final int position) {
 
             holder.txtview.setText(horizontalList.get(position).txt);
 
@@ -150,25 +123,25 @@ public class ScenarioOneScreen extends AppCompatActivity implements View.OnClick
 
                 public void onClick(View v) {
                     String list = horizontalList.get(position).txt.toString();
-                    mSetectItem.setText(list);
+                    mScenarioOneScreenBinding.contentScenarioOne.selectedText.setText(list);
                     switch (position){
 
-                        case 0:
+                        case ConstantElement.FRAGMENT_TYPE_1:
                             setFragment(new FragmentOne());
                             break;
-                        case 1:
+                        case ConstantElement.FRAGMENT_TYPE_2:
                             setFragment(new FragmentTwo());
                             break;
-                        case 2:
+                        case ConstantElement.FRAGMENT_TYPE_3:
                             setFragment(new FragmentThree());
                             break;
-                        case 3:
+                        case ConstantElement.FRAGMENT_TYPE_4:
                             setFragment(new FragmentFour());
                             break;
-                        case 4:
+                        case ConstantElement.FRAGMENT_TYPE_5:
                             setFragment(new FragmentFive());
                             break;
-
+                        default:
                     }
                     Toast.makeText(ScenarioOneScreen.this, "Fragment"+" "+(position+1), Toast.LENGTH_SHORT).show();
                 }
@@ -183,6 +156,5 @@ public class ScenarioOneScreen extends AppCompatActivity implements View.OnClick
             return horizontalList.size();
         }
     }
-
 
 }

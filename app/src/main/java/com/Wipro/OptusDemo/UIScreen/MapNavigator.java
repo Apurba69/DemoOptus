@@ -1,11 +1,13 @@
 package com.Wipro.OptusDemo.UIScreen;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.Wipro.OptusDemo.UIScreen.databinding.MapToolBarBinding;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -20,15 +22,15 @@ public class MapNavigator extends AppCompatActivity implements OnMapReadyCallbac
 
 
     private GoogleMap mMap;
-    double latt=12.97;
-    double longg=77.59;
-    String placeName="";
+    private double latt=12.97;
+    private double longg=77.59;
+    private String placeName="";
+    private MapToolBarBinding mMapToolBarBinding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.map_tool_bar);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        mMapToolBarBinding = DataBindingUtil.setContentView(this,R.layout.map_tool_bar);
+        setSupportActionBar(mMapToolBarBinding.toolbar);
         Intent lIntent = getIntent();
         if(lIntent!=null){
             latt=lIntent.getDoubleExtra("LAT",latt);

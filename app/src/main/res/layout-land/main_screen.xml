@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:background="@android:color/white"
-    tools:context="com.Wipro.OptusDemo.UIScreen.MainScreenActivity">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:background="@android:color/white"
+        tools:context="com.Wipro.OptusDemo.UIScreen.MainScreenActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -22,6 +24,9 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main_screen" />
+    <include
+        android:id="@+id/layoutScreen"
+        layout="@layout/content_main_screen" />
 
 </android.support.design.widget.CoordinatorLayout>
+</layout>
